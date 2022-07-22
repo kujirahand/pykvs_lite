@@ -10,7 +10,7 @@ kvs.set('foo', [1,2,3])
 print(kvs.get('fuga'))
 
 # enums
-for key in kvs.kvs_keys():
+for key in kvs.keys():
     print(key, '=', json.dumps(kvs.get(key), ensure_ascii=False))
 
 print(kvs.dump_json())
