@@ -1,3 +1,7 @@
+"""
+Simple and convenient Key-value Store Library
+"""
+
 import sqlite3, time, json
 
 global db
@@ -36,6 +40,7 @@ sql_delete = '''
 '''
 
 def connect(filename):
+    """Connect to database"""
     global db
     db = sqlite3.connect(filename)
     try:
@@ -51,10 +56,12 @@ def connect(filename):
     return db
 
 def close():
+    """close database"""
     if db is not None:
         db.close()
 
 def get(key, default = ''):
+    """get data"""
     if db is None: raise Exception('please connect before using `get` method.')
     if key not in cache_keys:
         return default
@@ -69,6 +76,7 @@ def get(key, default = ''):
         cur.close()
 
 def set(key, value):
+    """set data"""
     if db is None: raise Exception('please connect before using `set` method.')
     try:
         cur = db.cursor()
@@ -83,6 +91,7 @@ def set(key, value):
         cur.close()
 
 def kvs_keys(clearCache = True):
+    """get keys"""
     global cache_keys
     if db is None: return []
     # Use Cache?
@@ -95,6 +104,7 @@ def kvs_keys(clearCache = True):
     return cache_keys.keys()
 
 def dump_json():
+    """dump json"""
     obj = {}
     for key in kvs_keys():
         obj[key] = get(key, '')

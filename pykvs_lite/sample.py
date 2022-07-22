@@ -1,4 +1,4 @@
-import pykvs_lite.__init__ as kvs
+import pykvs_lite as kvs
 import json
 
 kvs.connect('test.db')
@@ -10,7 +10,7 @@ kvs.set('foo', [1,2,3])
 print(kvs.get('fuga'))
 
 # enums
-for key in kvs.keys():
+for key in kvs.kvs_keys():
     print(key, '=', json.dumps(kvs.get(key), ensure_ascii=False))
 
 print(kvs.dump_json())
