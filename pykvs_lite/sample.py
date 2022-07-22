@@ -1,4 +1,4 @@
-import pykvs.__init__ as kvs
+import pykvs_lite.__init__ as kvs
 import json
 
 kvs.connect('test.db')

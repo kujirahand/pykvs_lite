@@ -1,4 +1,4 @@
-import pykvs as kvs
+import pykvs_lite as kvs
 
 # connect to KVS
 kvs.connect('test.db')

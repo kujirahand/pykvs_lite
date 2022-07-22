@@ -1,4 +1,4 @@
-# pykvs
+# pykvs_lite
 
 Key-Value Store for Python
 
@@ -24,7 +24,7 @@ The pykvs has set and get method.
 However, you need to connect to the file before you use it.
 
 ```simple.py
-import pykvs as kvs
+import pykvs_lite as kvs
 
 # connect to KVS
 kvs.connect('test.db')
@@ -42,7 +42,7 @@ kvs.close()
 ## Sample
 
 ```sample2.py
-import pykvs as kvs
+import pykvs_lite as kvs
 import json
 
 # connect and set

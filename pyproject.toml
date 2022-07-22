@@ -1,6 +1,6 @@
 [project]
-name = "pykvs_kujirahand"
-version = "0.1.0"
+name = "pykvs_lite_kujirahand"
+version = "0.1.1"
 authors = [
   { name="kujirahand", email="web@kujirahand.com" },
 ]

@@ -1,8 +1,7 @@
-from random import lognormvariate
 from setuptools import setup, find_packages
 
 # get version
-with open("./pykvs/version.py") as f:
+with open("./pykvs_lite/version.py") as f:
     exec(f.read())
 
 # get readme
@@ -11,7 +10,7 @@ with open("./README.md") as f:
 
 # setup
 setup(
-    name="pykvs",
+    name="pykvs_lite",
     version=__version__,
     url="https://github.com/kujirahand/pykvs",
     author="kujirahand",

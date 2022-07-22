@@ -1,4 +1,4 @@
-import pykvs as kvs
+import pykvs_lite as kvs
 import json
 
 # connect and set
