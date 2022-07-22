@@ -3,7 +3,8 @@ from pykvs_lite import __version__ # バージョン情報取得のため
 
 # get readme
 with open("./README.md") as f:
-    long_desc = f.read().split("## Sample\n")[0]
+    # long_desc = f.read().split("## Sample\n")[0]
+    long_desc = f.read()
 
 AUTHOR = 'kujirahand'
 EMAIL = 'web@kujirahand.com'
