@@ -1,0 +1,19 @@
+[project]
+name = "pykvs_kujirahand"
+version = "0.1.0"
+authors = [
+  { name="kujirahand", email="web@kujirahand.com" },
+]
+description = "Simple and convenient Key-value Store Library"
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/kujirahand/pykvs"
+"Bug Tracker" = "https://github.com/kujirahand/pykvs/issues"

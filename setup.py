@@ -1,8 +1,13 @@
+from random import lognormvariate
 from setuptools import setup, find_packages
 
 # get version
 with open("./pykvs/version.py") as f:
     exec(f.read())
+
+# get readme
+with open("./README.md") as f:
+    long_desc = f.read().split("## Sample\n")[0]
 
 # setup
 setup(
@@ -16,6 +21,7 @@ setup(
     description="Simple and convenient Key-value Store Library",
     packages=find_packages(where='.'),
     install_requires=[],
+    long_description=long_desc,
     license="MIT",
     classifiers=[
         "Programming Language :: Python :: 3"
