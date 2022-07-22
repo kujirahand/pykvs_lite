@@ -10,12 +10,14 @@ Key-Value Store for Python
 ## Installation
 
 ```
-$ python3 -m pip install git+https://github.com/kujirahand/pykvs
+$ python3 -m pip install pykvs_lite
+# or
+$ python3 -m pip install git+https://github.com/kujirahand/pykvs_lite
 ```
 
 ## Repository
 
-- [GitHub](https://github.com/kujirahand/pykvs)
+- [GitHub](https://github.com/kujirahand/pykvs_lite)
 
 
 ## Sample
