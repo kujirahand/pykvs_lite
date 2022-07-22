@@ -1,8 +1,10 @@
 from setuptools import setup, find_packages
 
-with open("./src/pykvs/__init__.py") as f:
+# get version
+with open("./pykvs/version.py") as f:
     exec(f.read())
 
+# setup
 setup(
     name="pykvs",
     version=__version__,
@@ -12,7 +14,7 @@ setup(
     maintainer="kujirahand",
     maintainer_email="web@kujirahand.com",
     description="Simple and convenient Key-value Store Library",
-    packages=find_packages(where='src'),
+    packages=find_packages(where='.'),
     install_requires=[],
     license="MIT",
     classifiers=[
