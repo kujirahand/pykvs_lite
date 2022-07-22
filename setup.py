@@ -12,7 +12,7 @@ with open("./README.md") as f:
 setup(
     name="pykvs_lite",
     version=__version__,
-    url="https://github.com/kujirahand/pykvs",
+    url="https://github.com/kujirahand/pykvs_lite",
     author="kujirahand",
     author_email="web@kujirahand.com",
     maintainer="kujirahand",

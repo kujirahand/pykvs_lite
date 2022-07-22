@@ -1,6 +1,6 @@
 [project]
 name = "pykvs_lite_kujirahand"
-version = "0.1.1"
+version = "0.1.2"
 authors = [
   { name="kujirahand", email="web@kujirahand.com" },
 ]
@@ -15,5 +15,5 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/kujirahand/pykvs"
-"Bug Tracker" = "https://github.com/kujirahand/pykvs/issues"
+"Homepage" = "https://github.com/kujirahand/pykvs_lite"
+"Bug Tracker" = "https://github.com/kujirahand/pykvs_lite/issues"
