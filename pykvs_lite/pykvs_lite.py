@@ -12,6 +12,7 @@ sqls = {}
 cur_filename = ':memory:'
 # SQL template
 sqls_template = {
+    # kvs
     'create': '''
     CREATE TABLE IF NOT EXISTS __TABLE_NAME__ (
         key_id INTEGER PRIMARY KEY,
@@ -28,6 +29,22 @@ sqls_template = {
     'update': 'UPDATE __TABLE_NAME__ SET value=?, mtime=? WHERE key=?',
     'delete': 'DELETE FROM __TABLE_NAME__ WHERE key=?',
     'clear': 'DELETE FROM __TABLE_NAME__',
+    # doc
+    'create_doc': '''
+    CREATE TABLE IF NOT EXISTS doc__TABLE_NAME__ (
+        id INTEGER PRIMARY KEY,
+        value TEXT DEFAULT '',
+        ctime INTEGER DEFAULT 0,
+        mtime INTEGER DEFAULT 0
+    )
+    ''',
+    'select_doc': 'SELECT value, id FROM doc__TABLE_NAME__',
+    'recent_doc': 'SELECT value, id FROM doc__TABLE_NAME__ ORDER BY id DESC LIMIT ?',
+    'get_doc_by_id': 'SELECT value, id FROM doc__TABLE_NAME__ WHERE id=?',
+    'insert_doc': 'INSERT INTO doc__TABLE_NAME__ (value, ctime, mtime) VALUES (?, ?, ?)',
+    'update_doc': 'UPDATE doc__TABLE_NAME__ SET value=?, mtime=? WHERE id=?',
+    'delete_doc': 'DELETE FROM doc__TABLE_NAME__ WHERE id=?',
+    'clear_doc': 'DELETE FROM doc__TABLE_NAME__',
 }
 
 def connect(filename = ':memory:', table_name='kvs'):
@@ -49,6 +66,7 @@ def connect(filename = ':memory:', table_name='kvs'):
         # create table
         cur = db.cursor()
         cur.execute(sqls['create'], [])
+        cur.execute(sqls['create_doc'], [])
         # make cache keys
         kvs_keys(True)
     except Exception as e:
@@ -161,3 +179,82 @@ def clear():
         raise Exception('could not read database: ' + str(e))
     finally:
         cur.close()
+
+def all():
+    """get all doc"""
+    if db is None: raise Exception('please connect before using `all` method.')
+    result = []
+    cur = db.cursor()
+    for c in cur.execute(sqls['select_doc']):
+        v = json.loads(c[0])
+        v['id'] = c[1]
+        result.append(v)
+    cur.close()
+    return result
+
+def recent(limit):
+    """get recent docs"""
+    if db is None: raise Exception('please connect before using `recent` method.')
+    cur = db.cursor()
+    result = []
+    for c in cur.execute(sqls['recent_doc'], [limit]):
+        v = json.loads(c[0])
+        v['id'] = c[1]
+        result.append(v)
+    cur.close()
+    return result
+
+def get_doc_by_id(id):
+    """get doc by id"""
+    if db is None: raise Exception('please connect before using `get_doc_by_id` method.')
+    cur = db.cursor()
+    cur.execute(sqls['get_doc_by_id'], [id])
+    c = cur.fetchone()
+    v = json.loads(c[0])
+    v['id'] = c[1]
+    cur.close()
+    return v
+
+def insert(values):
+    """insert doc"""
+    if db is None: raise Exception('please connect before using `insert` method.')
+    cur = db.cursor()
+    cur.execute(sqls['insert_doc'], [json.dumps(values), int(time.time()), int(time.time())])
+    cur.close()
+    return cur.lastrowid
+
+def update_doc(id, values):
+    """update doc"""
+    if db is None: raise Exception('please connect before using `update_doc` method.')
+    cur = db.cursor()
+    cur.execute(sqls['update_doc'], [json.dumps(values), int(time.time()), id])
+    cur.close()
+    return id
+
+def delete_doc(id):
+    """delete doc by id"""
+    if db is None: raise Exception('please connect before using `delete_doc` method.')
+    cur = db.cursor()
+    cur.execute(sqls['delete_doc'], [id])
+    cur.close()
+    return id
+
+def clear_doc():
+    """clear all doc"""
+    if db is None: raise Exception('please connect before using `clear_doc` method.')
+    cur = db.cursor()
+    cur.execute(sqls['clear_doc'], [])
+    cur.close()
+
+def find(callback):
+    """find doc by lambda"""
+    if db is None: raise Exception('please connect before using `find` method.')
+    result = []
+    cur = db.cursor()
+    for c in cur.execute(sqls['select_doc']):
+        v = json.loads(c[0])
+        v['id'] = c[1]
+        if callback(v): result.append(v)
+    cur.close()
+    return result
+

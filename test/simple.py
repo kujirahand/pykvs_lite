@@ -33,3 +33,12 @@ kvs.connect('test.db')
 assert '' == kvs.get('hello', ''), 'multidatabase'
 kvs.close()
 os.unlink('test.db')
+
+# insert
+kvs.connect(':memory:')
+kvs.insert({'name': 'Tako', 'age': 20})
+kvs.insert({'name': 'Ika', 'age': 17})
+age = 0
+for c in kvs.all():
+    age += c['age']
+assert 37 == age, 'insert error'
